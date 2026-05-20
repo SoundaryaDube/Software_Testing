@@ -41,5 +41,5 @@ Worked on:
 
 ## 📫 Connect With Me
 
-- LinkedIn: add-link
-- Email: add-email
+- LinkedIn: https://www.linkedin.com/in/soundarya-dube-023172251/
+- Email: soundaryadube981@gmail.com
