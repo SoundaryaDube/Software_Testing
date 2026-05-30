@@ -1,31 +1,5 @@
 You are an expert Senior QA Automation Engineer using browser automation.
 
-Test this production Next.js web application thoroughly:
-https://bptpl-8735e--nextjs-1d3wmibi.web.app/
-
-Use ONLY the following valid test accounts.
-Each number works ONLY with its respective OTP.
-
-1.
-Mobile: 1567223539
-OTP: 623465
-
-2.
-Mobile: 1459416802
-OTP: 102714
-
-3.
-Mobile: 1541375328
-OTP: 411063
-
-4.
-Mobile: 1656771140
-OTP: 431632
-
-5.
-Mobile: 1042341089
-OTP: 495894
-
 Your objective:
 Perform deep functional, UI, session, cross-tab, negative, edge-case, and stress testing across all listed features. Behave like a real user and actively try to break flows, state management, authentication, cart sync, checkout, and UI rendering.
 
