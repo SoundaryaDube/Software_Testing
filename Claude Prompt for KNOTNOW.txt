@@ -1,0 +1,511 @@
+You are an expert Senior QA Automation Engineer using browser automation.
+
+Test this production Next.js web application thoroughly:
+https://bptpl-8735e--nextjs-1d3wmibi.web.app/
+
+Use ONLY the following valid test accounts.
+Each number works ONLY with its respective OTP.
+
+1.
+Mobile: 1567223539
+OTP: 623465
+
+2.
+Mobile: 1459416802
+OTP: 102714
+
+3.
+Mobile: 1541375328
+OTP: 411063
+
+4.
+Mobile: 1656771140
+OTP: 431632
+
+5.
+Mobile: 1042341089
+OTP: 495894
+
+Your objective:
+Perform deep functional, UI, session, cross-tab, negative, edge-case, and stress testing across all listed features. Behave like a real user and actively try to break flows, state management, authentication, cart sync, checkout, and UI rendering.
+
+==================================================
+LOGIN TESTING INSTRUCTIONS
+==================================================
+
+- Use different accounts for cross-tab and session-sync testing
+- Validate account switching behavior
+- Test logout/login conflicts across tabs
+- Test stale user data after switching accounts
+- Verify cart, wishlist, address, and profile isolation between accounts
+- Verify previous user data does not leak into another account
+- Verify token/session refresh after account switch
+- Verify unauthorized actions after logout
+
+NEGATIVE LOGIN TEST CASES:
+- Enter valid OTP with wrong mobile number
+- Enter OTP from another account
+- Use incomplete OTP
+- Use expired OTP
+- Attempt multiple OTP submissions rapidly
+- Refresh during OTP verification
+- Login simultaneously in multiple tabs using different accounts
+- Logout in one tab while another tab performs checkout
+
+EDGE CASES:
+- Login with Account A in Tab 1 and Account B in Tab 2
+- Switch accounts during active checkout
+- Add items to cart before login and verify persistence after login
+- Verify wishlist/cart isolation between accounts
+- Verify address sync does not leak across users
+
+
+==================================================
+GENERAL TESTING RULES
+==================================================
+
+- Open multiple browser tabs whenever relevant
+- Perform cross-tab synchronization testing
+- Include negative test cases for EVERY feature
+- Include edge-case scenarios for EVERY feature
+- Try invalid inputs and unexpected user behavior
+- Try rapid clicks / duplicate actions
+- Refresh pages during critical flows
+- Use browser back/forward navigation during flows
+- Observe console errors and failed API calls
+- Validate localStorage/sessionStorage consistency
+- Validate stale state handling
+- Capture screenshots ONLY when:
+  - A bug occurs
+  - UI breaks
+  - API errors appear
+  - Unexpected behavior occurs
+- Continue testing even if one feature fails
+- Mention exact reproduction steps
+- Categorize issues:
+  - P0 = Critical
+  - P1 = High
+  - P2 = Medium
+  - P3 = Low
+
+==================================================
+CORE FEATURES TO TEST
+==================================================
+
+1. Login (OTP Flow)
+POSITIVE:
+- Request OTP
+- Submit valid OTP
+- Session persistence after refresh
+
+NEGATIVE:
+- Invalid OTP
+- Expired OTP
+- Empty OTP
+- Rapid multiple OTP requests
+- Enter OTP after logout in another tab
+
+EDGE CASES:
+- Login in one tab while another tab is on checkout
+- Refresh during OTP verification
+- Multiple simultaneous login attempts
+
+==================================================
+
+2. Cross-tab Auth & Cart Sync
+POSITIVE:
+- Login sync
+- Cart sync
+
+NEGATIVE:
+- Logout in one tab while checkout active in another
+- Add/remove same item simultaneously
+- Clear cart in one tab during payment in another
+
+EDGE CASES:
+- Simultaneous cart updates
+- Refresh one tab during sync
+- Stale cart state validation
+
+==================================================
+
+3. Coupon Application (KNOT1K)
+POSITIVE:
+- Verify ₹1000 discount
+- Correct total recalculation
+
+NEGATIVE:
+- Invalid coupon
+- Expired coupon
+- Reapply same coupon
+- Apply coupon with empty cart
+
+EDGE CASES:
+- Apply/remove coupon rapidly
+- Refresh after applying coupon
+- Coupon persistence across tabs
+
+==================================================
+
+4. Checkout → Address → Razorpay
+Expected amount: ₹3680
+
+POSITIVE:
+- Complete checkout
+- Address selection
+- Payment initiation
+
+NEGATIVE:
+- Cancel payment popup
+- Payment timeout
+- Network interruption during payment
+- Refresh during payment
+
+EDGE CASES:
+- Double-click payment button
+- Change address mid-checkout
+- Multiple payment retries
+
+==================================================
+
+5. COD + Online Payment Toggle
+POSITIVE:
+- Toggle payment methods
+
+NEGATIVE:
+- Switch methods during loading
+- Refresh after selection
+
+EDGE CASES:
+- Toggle rapidly multiple times
+- Checkout in one tab while toggling in another
+
+==================================================
+
+6. Payment Failure Handling
+POSITIVE:
+- Retry failed payment
+
+NEGATIVE:
+- Failed transaction retry loop
+- Duplicate retry clicks
+- Payment callback failure
+
+EDGE CASES:
+- Order duplication validation
+- Cart inconsistency after failed payment
+
+==================================================
+
+7. Saved Address
+POSITIVE:
+- Add/edit/delete address
+
+NEGATIVE:
+- Empty fields
+- Invalid pincode
+- Very long address values
+- Special characters
+
+EDGE CASES:
+- Edit address in one tab while selecting in another
+- Delete selected address during checkout
+
+==================================================
+
+8. Theme Switcher
+POSITIVE:
+- Dark/Light/System mode
+
+NEGATIVE:
+- Refresh during theme switch
+- Invalid stored theme state
+
+EDGE CASES:
+- Multiple tabs with different themes
+- System theme change during session
+
+==================================================
+
+9. Refer & Earn (HEYOO)
+POSITIVE:
+- Referral visibility
+- Share/copy functionality
+
+NEGATIVE:
+- Invalid referral code
+- Empty referral handling
+
+EDGE CASES:
+- Copy spam clicks
+- Referral sync after login/logout
+
+==================================================
+
+10. Help & Query
+POSITIVE:
+- Call/Mail/WhatsApp actions
+
+NEGATIVE:
+- Broken links
+- Unsupported device behavior
+
+EDGE CASES:
+- Multiple rapid clicks
+- Popup blocker behavior
+
+==================================================
+
+11. KNOT Picks
+POSITIVE:
+- Swipe/like/dislike/undo/add to bag
+
+NEGATIVE:
+- Undo without action
+- Rapid swiping
+
+EDGE CASES:
+- Simultaneous add-to-bag actions
+- State persistence after refresh
+
+==================================================
+
+12. TRY 'n BUY
+POSITIVE:
+- Multi-size add to cart
+
+NEGATIVE:
+- Duplicate sizes
+- Invalid quantity
+
+EDGE CASES:
+- Add/remove rapidly
+- Sync cart across tabs
+
+==================================================
+
+13. Virtual Try-On Upload
+POSITIVE:
+- Upload supported image
+
+NEGATIVE:
+- Unsupported format
+- Large file upload
+- Corrupted image upload
+- Empty upload
+
+EDGE CASES:
+- Refresh during upload
+- Multiple uploads simultaneously
+
+==================================================
+
+14. Size Chart
+POSITIVE:
+- Open/close visibility
+
+NEGATIVE:
+- Broken modal behavior
+
+EDGE CASES:
+- Open multiple times rapidly
+- Responsive overflow testing
+
+==================================================
+
+15. Share Functionality
+POSITIVE:
+- Copy to clipboard
+
+NEGATIVE:
+- Clipboard permission denied
+
+EDGE CASES:
+- Rapid share clicks
+- Share after logout
+
+==================================================
+
+16. Collection Gender Toggle
+POSITIVE:
+- Men/Women switching
+
+NEGATIVE:
+- Empty category response
+
+EDGE CASES:
+- Toggle during filtering/sorting
+- Refresh after toggle
+
+==================================================
+
+17. Filters
+POSITIVE:
+- Brand/Subcategory filtering
+
+NEGATIVE:
+- Invalid combinations
+- Empty results
+
+EDGE CASES:
+- Multiple filters rapidly
+- Filter persistence after refresh
+
+==================================================
+
+18. Sort
+POSITIVE:
+- Price/Popularity/Discount sorting
+
+NEGATIVE:
+- Broken sorting order
+
+EDGE CASES:
+- Sort during pagination/filtering
+- Rapid sorting changes
+
+==================================================
+
+19. Trends Editorial Page
+POSITIVE:
+- Page rendering
+
+NEGATIVE:
+- Broken media
+- Missing content
+
+EDGE CASES:
+- Slow loading simulation
+- Refresh during media loading
+
+==================================================
+
+20. Search
+POSITIVE:
+- Autocomplete/results
+
+NEGATIVE:
+- Empty search
+- Invalid characters
+- SQL/XSS-like inputs
+
+EDGE CASES:
+- Rapid typing
+- Search during slow loading
+- Search persistence after refresh
+
+==================================================
+
+21. Wishlist
+POSITIVE:
+- Add/remove items
+
+NEGATIVE:
+- Duplicate wishlist actions
+
+EDGE CASES:
+- Cross-tab sync
+- Wishlist update during logout
+
+==================================================
+
+22. Wishlist → Add to Bag
+POSITIVE:
+- Size picker functionality
+
+NEGATIVE:
+- Missing size selection
+
+EDGE CASES:
+- Simultaneous wishlist/cart updates
+
+==================================================
+
+23. Gift Wrap
+Expected price: ₹30
+
+POSITIVE:
+- Add/remove gift wrap
+
+NEGATIVE:
+- Duplicate additions
+
+EDGE CASES:
+- Price recalculation after refresh
+
+==================================================
+
+24. Delivery Scheduler
+POSITIVE:
+- Date/time selection
+
+NEGATIVE:
+- Invalid slot selection
+- Expired slot handling
+
+EDGE CASES:
+- Slot changes during checkout
+- Refresh after slot selection
+
+==================================================
+
+25. Cross Functional Sync Testing
+Test synchronization for:
+- Login
+- User profile
+- Address
+- Wishlist
+- Cart
+- Theme
+
+NEGATIVE:
+- Logout during active flows
+- Simultaneous conflicting actions
+
+EDGE CASES:
+- Multi-tab chaos testing
+- Refresh during synchronization
+- Browser back/forward during sync
+
+==================================================
+ADDITIONAL ADVANCED TESTING
+==================================================
+
+Perform:
+- Multi-tab chaos testing
+- Stress clicking
+- Route protection testing
+- Unauthorized page access
+- Broken image/link detection
+- Hydration mismatch detection
+- Console error detection
+- Network interruption simulation
+- Slow loading behavior
+- Browser refresh during API calls
+- Session expiration handling
+- Mobile responsive checks
+- Back/forward navigation consistency
+- Duplicate API request detection
+
+==================================================
+OUTPUT FORMAT
+==================================================
+
+For EVERY issue found provide:
+- Bug Title
+- Severity (P0/P1/P2/P3)
+- Feature Name
+- Steps to Reproduce
+- Expected Result
+- Actual Result
+- Screenshot Reference (if captured)
+- Possible Root Cause
+
+At the end provide:
+1. Total test cases executed
+2. Positive test cases passed/failed
+3. Negative test cases passed/failed
+4. Edge cases passed/failed
+5. Critical observations
+6. Console/API errors found
+7. Overall application stability assessment
